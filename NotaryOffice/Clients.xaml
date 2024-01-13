@@ -25,11 +25,11 @@
         <DataGrid Grid.Row="1" Grid.Column="1" x:Name="ClientsDataGrid" AutoGenerateColumns="False" 
                   ItemsSource="{Binding}" Background="White" Foreground="Black">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="id" Binding="{Binding id}" MinWidth="40"/>
-                <DataGridTextColumn Header="name" Binding="{Binding name}" MinWidth="80"/>
-                <DataGridTextColumn Header="occupation" Binding="{Binding occupation}" MinWidth="80"/>
-                <DataGridTextColumn Header="address" Binding="{Binding address}" MinWidth="80"/>
-                <DataGridTextColumn Header="phoneNumber" Binding="{Binding phoneNumber}" MinWidth="80"/>
+                <DataGridTextColumn Header="id" Binding="{Binding Id}" MinWidth="40"/>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" MinWidth="80"/>
+                <DataGridTextColumn Header="occupation" Binding="{Binding Occupation}" MinWidth="80"/>
+                <DataGridTextColumn Header="address" Binding="{Binding Address}" MinWidth="80"/>
+                <DataGridTextColumn Header="phoneNumber" Binding="{Binding PhoneNumber}" MinWidth="80"/>
             </DataGrid.Columns>
         </DataGrid>
 
