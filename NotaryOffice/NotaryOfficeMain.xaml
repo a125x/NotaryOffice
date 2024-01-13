@@ -62,7 +62,7 @@
                 Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Top" 
                 Background="Black" Foreground="White" Margin="0, 35, 0, 0"/>
 
-        <Button x:Name="btnEdit" Content="edit deal" Click="btnEdit_Click" Grid.Column="2" Grid.Row="1" 
+        <Button x:Name="btnDelete" Content="delete deal" Click="btnDelete_Click" Grid.Column="2" Grid.Row="1" 
         Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
         Background="Black" Foreground="White" Margin="0, 0, 0, 35"/>
 
@@ -70,7 +70,7 @@
 Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Top" 
 Background="Black" Foreground="White" Margin="0, 35, 0, 0"/>
 
-        <Button x:Name="btnSerices" Content="services" Click="btnSerices_Click" Grid.Column="0" Grid.Row="1" 
+        <Button x:Name="btnServices" Content="services" Click="btnServices_Click" Grid.Column="0" Grid.Row="1" 
 Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
 Background="Black" Foreground="White" Margin="0, 0, 0, 35"/>
 
@@ -117,13 +117,13 @@ HorizontalAlignment="Center"/>
 
             <TextBox x:Name="txbId" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
          HorizontalAlignment="Center" MinWidth="15"/>
-            <TextBox x:Name="txbClientid" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
+            <TextBox x:Name="txbClientId" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
          HorizontalAlignment="Center" MinWidth="20"/>
-            <TextBox x:Name="txbserviceids" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"
+            <TextBox x:Name="txbServiceIds" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"
          HorizontalAlignment="Center" MinWidth="35"/>
             <TextBox x:Name="txbSum" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center"
          HorizontalAlignment="Center" MinWidth="25"/>
-            <TextBox x:Name="txbComissions" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center"
+            <TextBox x:Name="txbCommissions" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center"
          HorizontalAlignment="Center" MinWidth="25"/>
             <TextBox x:Name="txbDescription" Grid.Row="2" Grid.Column="5" VerticalAlignment="Center"
          HorizontalAlignment="Center" MinWidth="45"/>

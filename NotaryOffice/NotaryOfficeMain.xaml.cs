@@ -29,7 +29,7 @@ namespace NotaryOffice
         public decimal Sum { get; set; }
         public decimal Commissions { get; set; }
         public string Description { get; set; }
-        public List<decimal> Discounts { get; set; }
+        public List<int> Discounts { get; set; }
     }
 
     public partial class NotaryOfficeMain : Page
@@ -59,35 +59,44 @@ namespace NotaryOffice
                     Commissions = Convert.ToDecimal(dealElement.Element("commissions").Value),
                     Description = dealElement.Element("description").Value,
                     ServiceIds = dealElement.Element("services").Elements("service_id").Select(s => Convert.ToInt32(s.Value)).ToList(),
-                    Discounts = dealElement.Element("discounts").Elements("discount").Select(d => Convert.ToDecimal(d.Value)).ToList()
+                    Discounts = dealElement.Element("discounts").Elements("discount").Select(d => Convert.ToInt32(d.Value)).ToList()
                 };
                 dealsList.Add(deal);
             }
-
 
             DealsDataGrid.ItemsSource = dealsList;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            AddDealDialog dialog = new AddDealDialog();
-            if (dialog.ShowDialog() == true)
+            if (txbId.Text != "" && 
+                txbClientId.Text != "" && 
+                txbServiceIds.Text != "" && 
+                txbSum.Text != "" && 
+                txbCommissions.Text != "" &&
+                txbDiscount.Text != "")
             {
                 Deals newDeal = new Deals
                 {
-                    Id = dialog.Id,
-                    ClientId = dialog.ClientId,
-                    ServiceIds = dialog.ServiceIds,
-                    Sum = dialog.Sum,
-                    Commissions = dialog.Commissions,
-                    Description = dialog.Description,
-                    Discounts = dialog.Discounts
+                    Id = Int32.Parse(txbId.Text),
+                    ClientId = Int32.Parse(txbClientId.Text),
+                    ServiceIds = txbServiceIds.Text.Split(' ')?.Select(Int32.Parse)?.ToList(),
+                    Sum = Int32.Parse(txbSum.Text),
+                    Commissions = Int32.Parse(txbCommissions.Text),
+                    Description = txbDescription.Text,
+                    Discounts = txbDiscount.Text.Split(' ')?.Select(Int32.Parse)?.ToList()
                 };
                 dealsList.Add(newDeal);
 
                 AddDealToXml(newDeal);
                 RefreshDataGrid();
+
+                // Display a message to indicate successful addition
+                MessageBox.Show("deal with id " + txbId.Text + " has been added successfully");
             }
+            else
+                // Display a message to indicate unsuccessful addition
+                MessageBox.Show("incorrect data, please try again");
         }
 
         private void AddDealToXml(Deals deal)
@@ -95,10 +104,10 @@ namespace NotaryOffice
             dealsXml.Root.Add(new XElement("Deal",
                 new XElement("id", deal.Id),
                 new XElement("client_id", deal.ClientId),
-                new XElement("sum", deal.Sum),
-                new XElement("comissions", deal.Commissions),
-                new XElement("description", deal.Description),
                 new XElement("services", deal.ServiceIds.Select(id => new XElement("service_id", id))),
+                new XElement("sum", deal.Sum),
+                new XElement("commissions", deal.Commissions),
+                new XElement("description", deal.Description),
                 new XElement("discounts", deal.Discounts.Select(discount => new XElement("discount", discount)))
             ));
             dealsXml.Save(dealsPath);
@@ -111,14 +120,43 @@ namespace NotaryOffice
             DealsDataGrid.ItemsSource = dealsList;
         }
 
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            // Assuming the ID to be deleted is provided by the user
+            int dealIdToDelete = Int32.Parse(txbId.Text); // Implement a method to retrieve the ID from the user
+
+            XDocument dealsXml = XDocument.Load(dealsPath);
+            XElement dealToDelete = dealsXml.Root.Elements("Deal").FirstOrDefault(d => (int)d.Element("id") == dealIdToDelete);
+
+            if (dealToDelete != null)
+            {
+                dealToDelete.Remove(); // Remove the deal from the XML
+                dealsXml.Save(dealsPath); // Save the changes to the XML file
+                LoadDeals();
+                RefreshDataGrid();
+                // Display a message to indicate successful deletion
+                MessageBox.Show("deal with id " + dealIdToDelete + " has been successfully deleted");
+            }
+            else
+            {
+                // Display a message if the deal with the provided ID was not found
+                MessageBox.Show("deal with id " + dealIdToDelete + " was not found");
+            }
 
         }
 
         private void btnClients_Click(object sender, RoutedEventArgs e)
         {
+            var newPage = new Clients();
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.Content = newPage;
+        }
 
+        private void btnServices_Click(object sender, RoutedEventArgs e)
+        {
+            var newPage = new Services();
+            var mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.Content = newPage;
         }
     }
 }
