@@ -8,7 +8,76 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Services">
 
-    <Grid>
-        
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="notary office services" FontSize="18" Foreground="Black" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid Grid.Row="1" Grid.Column="1" x:Name="ServicesDataGrid" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding}" Background="White" Foreground="Black">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="id" Binding="{Binding Id}" MinWidth="40"/>
+                <DataGridTextColumn Header="title" Binding="{Binding Title}" MinWidth="80"/>
+                <DataGridTextColumn Header="description" Binding="{Binding Description}" MinWidth="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="btnAdd" Content="add service" Click="btnAdd_Click" Grid.Column="2" Grid.Row="1" 
+                Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Background="Black" Foreground="White" Margin="0, 35, 0, 0"/>
+
+        <Button x:Name="btnDelete" Content="delete service" Click="btnDelete_Click" Grid.Column="2" Grid.Row="1" 
+        Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+        Background="Black" Foreground="White" Margin="0, 0, 0, 35"/>
+
+        <Button x:Name="btnDeals" Content="deals" Click="btnDeals_Click" Grid.Column="0" Grid.Row="1" 
+Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Top" 
+Background="Black" Foreground="White" Margin="0, 35, 0, 0"/>
+
+        <Button x:Name="btnClients" Content="clients" Click="btnClients_Click" Grid.Column="0" Grid.Row="1" 
+Width="100px" Height="50px" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+Background="Black" Foreground="White" Margin="0, 0, 0, 35"/>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="50"/>
+                <ColumnDefinition MaxWidth="90"/>
+                <ColumnDefinition MaxWidth="90"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="enter new entity or redact existing one" Grid.ColumnSpan="7" 
+                       VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
+
+            <TextBlock Text="id" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="title" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBlock Text="description" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" 
+           HorizontalAlignment="Center"/>
+
+            <TextBox x:Name="txbId" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
+         HorizontalAlignment="Center" MinWidth="30"/>
+            <TextBox x:Name="txbTitle" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
+         HorizontalAlignment="Center" MinWidth="70"/>
+            <TextBox x:Name="txbDescription" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"
+         HorizontalAlignment="Center" MinWidth="70"/>
+        </Grid>
+
     </Grid>
 </Page>

@@ -18,6 +18,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <TextBlock Text="welcome to the notary office 2024" Grid.Row="0" Grid.Column="1" 
+        HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -28,33 +31,33 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-    
+
             <TextBox x:Name="tbxLogin" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                     VerticalAlignment="Center" Background="Transparent"
-         HorizontalAlignment="Center" HorizontalContentAlignment="Left"  
+                                 VerticalAlignment="Center" Background="Transparent"
+HorizontalAlignment="Stretch" Margin="25 0 25 0" HorizontalContentAlignment="Left"  
          VerticalContentAlignment="Center" TextChanged="tbxLogin_TextChanged"
-         FontSize="24" Height="50" Width="350"/>
+         FontSize="16" Height="40"/>
             <TextBlock x:Name="tbPlaceholderLogin" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Text="login" 
+VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Text="login (try a or sign up)" 
                        Foreground="LightGray" FontWeight="Light" Panel.ZIndex="-1"
-FontSize="24"/>
+FontSize="16"/>
 
             <TextBox x:Name="txbPassword" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
                      VerticalAlignment="Center" Background="Transparent"
-         HorizontalAlignment="Center" HorizontalContentAlignment="Left" 
+         HorizontalAlignment="Stretch" Margin="25 0 25 0" HorizontalContentAlignment="Left" 
          VerticalContentAlignment="Center"  TextChanged="txbPassword_TextChanged"
-         FontSize="24" Height="50" Width="350"/>
+         FontSize="18" Height="40"/>
             <TextBlock x:Name="tbPlaceholderPassword" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Text="password" 
+VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Text="password (try a)"
                        Foreground="LightGray" FontWeight="Light" Panel.ZIndex="-1"
-FontSize="24"/>
+FontSize="16"/>
 
-            <Button Name="btnSingIn" Width="150px" Height="50px" VerticalAlignment="Center" 
-    HorizontalAlignment="Center" Content="sign in" FontSize="24" Click="btnSingIn_Click"
+            <Button Name="btnSingIn" Width="100px" Height="50px" VerticalAlignment="Center" 
+    HorizontalAlignment="Left" Margin="25, 0, 0, 0" Content="sign in" Click="btnSingIn_Click" FontSize="16"
     BorderThickness="0" Background="Black" Foreground="White" Grid.Row="2" Grid.Column="0"/>
             
-            <Button Name="btnSignUp" Width="150px" Height="50px" VerticalAlignment="Center" 
-    HorizontalAlignment="Center" Content="sign up" FontSize="24" Click="btnSignUp_Click"
+            <Button Name="btnSignUp" Width="100px" Height="50px" VerticalAlignment="Center" 
+    HorizontalAlignment="Right" Margin="0, 0, 25, 0" Content="sign up" Click="btnSignUp_Click" FontSize="16"
     BorderThickness="0" Background="Black" Foreground="White" Grid.Row="2" Grid.Column="1"/>
         </Grid>
     </Grid>

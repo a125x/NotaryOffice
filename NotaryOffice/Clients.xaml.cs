@@ -69,20 +69,27 @@ namespace NotaryOffice
                 txbAddress.Text != "" &&
                 txbPhoneNumber.Text != "")
             {
-                ClientsData newData = new ClientsData
+                try
                 {
-                    Id = Int32.Parse(txbId.Text),
-                    Name = txbName.Text,
-                    Occupation = txbOccupation.Text,
-                    Address = txbAddress.Text,
-                    PhoneNumber = txbPhoneNumber.Text,
-                };
-                clientsList.Add(newData);
+                    ClientsData newData = new ClientsData
+                    {
+                        Id = Int32.Parse(txbId.Text),
+                        Name = txbName.Text,
+                        Occupation = txbOccupation.Text,
+                        Address = txbAddress.Text,
+                        PhoneNumber = txbPhoneNumber.Text,
+                    };
+                    clientsList.Add(newData);
 
-                AddDataToXml(newData);
-                RefreshDataGrid();
+                    AddDataToXml(newData);
+                    RefreshDataGrid();
 
-                MessageBox.Show("client with id " + txbId.Text + " has been added successfully");
+                    MessageBox.Show("client with id " + txbId.Text + " has been added successfully");
+                }
+                catch
+                {
+                    MessageBox.Show("incorrect data, please try again");
+                }
             }
             else
                 MessageBox.Show("incorrect data, please try again");
@@ -109,25 +116,31 @@ namespace NotaryOffice
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int clientIdToDelete = Int32.Parse(txbId.Text); 
-
-            XDocument clientsXml = XDocument.Load(clientsPath);
-            XElement clientsToDelete = clientsXml.Root.Elements("client").FirstOrDefault(d => (int)d.Element("id") == clientIdToDelete);
-
-            if (clientsToDelete != null)
+            try
             {
-                clientsToDelete.Remove(); 
-                clientsXml.Save(clientsPath); 
-                LoadClients();
-                RefreshDataGrid();
-                
-                MessageBox.Show("client with id " + clientIdToDelete + " has been successfully deleted");
-            }
-            else
-            {
-                MessageBox.Show("client with id " + clientIdToDelete + " was not found");
-            }
+                int clientIdToDelete = Int32.Parse(txbId.Text);
 
+                XDocument clientsXml = XDocument.Load(clientsPath);
+                XElement clientsToDelete = clientsXml.Root.Elements("client").FirstOrDefault(d => (int)d.Element("id") == clientIdToDelete);
+
+                if (clientsToDelete != null)
+                {
+                    clientsToDelete.Remove();
+                    clientsXml.Save(clientsPath);
+                    LoadClients();
+                    RefreshDataGrid();
+
+                    MessageBox.Show("client with id " + clientIdToDelete + " has been successfully deleted");
+                }
+                else
+                {
+                    MessageBox.Show("client with id " + clientIdToDelete + " was not found");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("client with id " + txbId.Text + " was not found");
+            }
         }
 
         private void btnDeals_Click(object sender, RoutedEventArgs e)

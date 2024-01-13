@@ -76,26 +76,31 @@ namespace NotaryOffice
                 txbCommissions.Text != "" &&
                 txbDiscount.Text != "")
             {
-                Deals newDeal = new Deals
+                try
                 {
-                    Id = Int32.Parse(txbId.Text),
-                    ClientId = Int32.Parse(txbClientId.Text),
-                    ServiceIds = txbServiceIds.Text.Split(' ')?.Select(Int32.Parse)?.ToList(),
-                    Sum = Int32.Parse(txbSum.Text),
-                    Commissions = Int32.Parse(txbCommissions.Text),
-                    Description = txbDescription.Text,
-                    Discounts = txbDiscount.Text.Split(' ')?.Select(Int32.Parse)?.ToList()
-                };
-                dealsList.Add(newDeal);
+                    Deals newDeal = new Deals
+                    {
+                        Id = Int32.Parse(txbId.Text),
+                        ClientId = Int32.Parse(txbClientId.Text),
+                        ServiceIds = txbServiceIds.Text.Split(' ')?.Select(Int32.Parse)?.ToList(),
+                        Sum = Int32.Parse(txbSum.Text),
+                        Commissions = Int32.Parse(txbCommissions.Text),
+                        Description = txbDescription.Text,
+                        Discounts = txbDiscount.Text.Split(' ')?.Select(Int32.Parse)?.ToList()
+                    };
+                    dealsList.Add(newDeal);
 
-                AddDealToXml(newDeal);
-                RefreshDataGrid();
+                    AddDealToXml(newDeal);
+                    RefreshDataGrid();
 
-                // Display a message to indicate successful addition
-                MessageBox.Show("deal with id " + txbId.Text + " has been added successfully");
+                    MessageBox.Show("deal with id " + txbId.Text + " has been added successfully");
+                }
+                catch
+                {
+                    MessageBox.Show("incorrect data, please try again");
+                }
             }
             else
-                // Display a message to indicate unsuccessful addition
                 MessageBox.Show("incorrect data, please try again");
         }
 
@@ -122,27 +127,31 @@ namespace NotaryOffice
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            // Assuming the ID to be deleted is provided by the user
-            int dealIdToDelete = Int32.Parse(txbId.Text); // Implement a method to retrieve the ID from the user
-
-            XDocument dealsXml = XDocument.Load(dealsPath);
-            XElement dealToDelete = dealsXml.Root.Elements("Deal").FirstOrDefault(d => (int)d.Element("id") == dealIdToDelete);
-
-            if (dealToDelete != null)
+            try
             {
-                dealToDelete.Remove(); // Remove the deal from the XML
-                dealsXml.Save(dealsPath); // Save the changes to the XML file
-                LoadDeals();
-                RefreshDataGrid();
-                // Display a message to indicate successful deletion
-                MessageBox.Show("deal with id " + dealIdToDelete + " has been successfully deleted");
-            }
-            else
-            {
-                // Display a message if the deal with the provided ID was not found
-                MessageBox.Show("deal with id " + dealIdToDelete + " was not found");
-            }
+                int dealIdToDelete = Int32.Parse(txbId.Text);
 
+                XDocument dealsXml = XDocument.Load(dealsPath);
+                XElement dealToDelete = dealsXml.Root.Elements("Deal").FirstOrDefault(d => (int)d.Element("id") == dealIdToDelete);
+
+                if (dealToDelete != null)
+                {
+                    dealToDelete.Remove();
+                    dealsXml.Save(dealsPath);
+                    LoadDeals();
+                    RefreshDataGrid();
+
+                    MessageBox.Show("deal with id " + dealIdToDelete + " has been successfully deleted");
+                }
+                else
+                {
+                    MessageBox.Show("deal with id " + dealIdToDelete + " was not found");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("deal with id " + txbId.Text + " was not found");
+            }
         }
 
         private void btnClients_Click(object sender, RoutedEventArgs e)
